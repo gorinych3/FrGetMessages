@@ -1,18 +1,14 @@
 package ru.gorinych3.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.client.RestTemplate;
 import ru.gorinych3.MyProp;
 import ru.gorinych3.mail.EmailServiceImpl;
 import ru.gorinych3.models.EntityWrapper;
 import ru.gorinych3.models.FrMessage;
 import ru.gorinych3.models.MessagesLSP;
-import ru.gorinych3.repositories.LSPRepositoryCustom;
 import ru.gorinych3.repositories.LSPRepositoryCustomImp;
 import ru.gorinych3.repositories.MessRepository;
 import java.text.SimpleDateFormat;
@@ -84,7 +80,7 @@ public class FrService {
 */
 
         } else System.out.println("СПИСОК ПУСТОЙ!!!!!!!!!!!!!!!!!!!");
-        emailService.sendSimpleMessage(property.getReciever(), "test", "Пробное сообщение");
+        //emailService.sendSimpleMessage(property.getReciever(), "test", "Пробное сообщение");
     }
 
     private FrMessage parseEntityToPojo(MessagesLSP lsp){
@@ -115,7 +111,16 @@ public class FrService {
            repository.save(entityWrapper.getEntity());
             //System.out.println(entityWrapper.getCount());
         }
+        //else System.out.println(postTextForObject(entityWrapper.getEntity().getText()));
+        else postTextForObject(entityWrapper.getEntity().getText());
 
+    }
+
+    private Integer postTextForObject(String text) {
+        RestTemplate rest = new RestTemplate();
+        //System.out.println(text);
+        return rest.postForObject("http://localhost:8082/connect",
+                text, Integer.class);
     }
 
 }
