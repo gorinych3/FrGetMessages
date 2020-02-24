@@ -36,8 +36,8 @@ public class Application {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("gorinych333@gmail.com");
-        mailSender.setPassword("1545731gorinych3g");
+        mailSender.setUsername("************");
+        mailSender.setPassword("**********");
 
 
         Properties props = mailSender.getJavaMailProperties();
@@ -45,8 +45,8 @@ public class Application {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         //props.put("mail.debug", "true");
-        props.put("mail.smtp.user", "gorinych333@gmail.com");
-        props.put("mail.smtp.password", "1545731gorinych3g");
+        props.put("mail.smtp.user", "**********");
+        props.put("mail.smtp.password", "**********");
 
 
         return mailSender;

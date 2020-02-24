@@ -83,7 +83,7 @@ public class FrService {
 */
 
         } else System.out.println("СПИСОК ПУСТОЙ!!!!!!!!!!!!!!!!!!!");
-        emailService.sendSimpleMessage("gorinych33@yandex.ru", "test", "Пробное сообщение");
+        emailService.sendSimpleMessage("***********", "test", "Пробное сообщение");
     }
 
     private FrMessage parseEntityToPojo(MessagesLSP lsp){
