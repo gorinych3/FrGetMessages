@@ -31,32 +31,32 @@ public class FrService {
     @Autowired
     private MyProp property;
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss:S");
+
     /**
      * com.microsoft.sqlserver.jdbc.SQLServerException: Недопустимое имя столбца InsertDate
      */
     @Transactional
     public void getAllNMessages(){
 
-        System.out.println("FrService - getAllNMessages started!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+        System.out.println("стартовое время = " + dateFormat.format(new Date()));
         List<MessagesLSP> messages =  repositoryCustom.getMessagesLSP();
-        System.out.println("FrService - getAllNMessages GET MESSAGES!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 
         if(messages != null) {
             for (MessagesLSP mess : messages) {
-                //mess.setCount(1);
-                System.out.println("Object from bd - " + mess.toString());
-
+                putEntityToWrapper(mess);
             }
 
         } else System.out.println("СПИСОК ПУСТОЙ!!!!!!!!!!!!!!!!!!!");
 
-
+        System.out.println("финишное время = " + dateFormat.format(new Date()));
     }
 
 
     @Transactional
     public void newMethod(){
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss:S");
+
         System.out.println("стартовое время = " + dateFormat.format(new Date()));
         Set<MessagesLSP> mess = repository.findMessagesLSPSByStatus("N");
         if(mess != null) {
@@ -68,7 +68,7 @@ public class FrService {
              //frMessage.setCount(1);
                 putEntityToWrapper(mes);
             }
-            System.out.println("финишное время = " + dateFormat.format(new Date()));
+            //System.out.println("финишное время = " + dateFormat.format(new Date()));
             /*
             for (MessagesLSP messagesLSP : mess){
                 messagesLSP.setStatus("N");
@@ -112,7 +112,9 @@ public class FrService {
             //System.out.println(entityWrapper.getCount());
         }
         //else System.out.println(postTextForObject(entityWrapper.getEntity().getText()));
-        else postTextForObject(entityWrapper.getEntity().getText());
+        else {postTextForObject(entityWrapper.getEntity().getText());}
+
+
 
     }
 

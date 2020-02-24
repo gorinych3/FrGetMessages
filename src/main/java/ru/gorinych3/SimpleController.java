@@ -26,9 +26,9 @@ public class SimpleController {
 
     @PostMapping(value = "/start")
     public void startApp(){
-        //service.getAllNMessages();
+        service.getAllNMessages();
         //service.getAllMes();
-        service.newMethod();
+        //service.newMethod();
         //service.sched();
     }
 
