@@ -7,6 +7,7 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Component;
+import ru.gorinych3.MyProp;
 
 import javax.mail.internet.MimeMessage;
 import java.io.InputStream;
@@ -18,11 +19,14 @@ public class EmailServiceImpl implements JavaMailSender {
     @Autowired
     public JavaMailSender emailSender;
 
+    @Autowired
+    private MyProp property;
+
     public void sendSimpleMessage(
             String to, String subject, String text) {
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("*********");
+        message.setFrom(property.getUsername());
         message.setTo(to);
         message.setSubject(subject);
         message.setText(text);

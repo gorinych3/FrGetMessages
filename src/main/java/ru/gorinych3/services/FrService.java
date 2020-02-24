@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.gorinych3.MyProp;
 import ru.gorinych3.mail.EmailServiceImpl;
 import ru.gorinych3.models.EntityWrapper;
 import ru.gorinych3.models.FrMessage;
@@ -29,10 +30,10 @@ public class FrService {
     private EmailServiceImpl emailService;
 
     @Autowired
-    private SimpleMailMessage template;
+    private LSPRepositoryCustomImp repositoryCustom;
 
     @Autowired
-    private LSPRepositoryCustomImp repositoryCustom;
+    private MyProp property;
 
     /**
      * com.microsoft.sqlserver.jdbc.SQLServerException: Недопустимое имя столбца InsertDate
@@ -83,7 +84,7 @@ public class FrService {
 */
 
         } else System.out.println("СПИСОК ПУСТОЙ!!!!!!!!!!!!!!!!!!!");
-        emailService.sendSimpleMessage("***********", "test", "Пробное сообщение");
+        emailService.sendSimpleMessage(property.getReciever(), "test", "Пробное сообщение");
     }
 
     private FrMessage parseEntityToPojo(MessagesLSP lsp){

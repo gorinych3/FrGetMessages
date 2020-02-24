@@ -1,5 +1,6 @@
 package ru.gorinych3;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
@@ -17,6 +18,9 @@ import java.util.Properties;
 @EntityScan("ru.gorinych3.models")
 @SpringBootApplication
 public class Application {
+
+    @Autowired
+    private MyProp property;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -36,8 +40,8 @@ public class Application {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername("************");
-        mailSender.setPassword("**********");
+        mailSender.setUsername(property.getUsername());
+        mailSender.setPassword(property.getPassword());
 
 
         Properties props = mailSender.getJavaMailProperties();
@@ -45,8 +49,8 @@ public class Application {
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.starttls.enable", "true");
         //props.put("mail.debug", "true");
-        props.put("mail.smtp.user", "**********");
-        props.put("mail.smtp.password", "**********");
+        props.put("mail.smtp.user", property.getUsername());
+        props.put("mail.smtp.password", property.getPassword());
 
 
         return mailSender;
@@ -56,7 +60,7 @@ public class Application {
     @Bean
     public SimpleMailMessage templateSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("********");
+        message.setFrom(property.getUsername());
         message.setText(
                 "This is the test email template for your email:\n%s\n");
         return message;
