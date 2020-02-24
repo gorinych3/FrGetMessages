@@ -56,7 +56,7 @@ public class Application {
     @Bean
     public SimpleMailMessage templateSimpleMessage() {
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("gorinych333@gmail.com");
+        message.setFrom("********");
         message.setText(
                 "This is the test email template for your email:\n%s\n");
         return message;
